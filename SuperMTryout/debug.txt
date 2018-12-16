@@ -1,0 +1,20 @@
+select b.prod pname,b.price pprice,c.qty pnos,c.qty*b.price ptprice from  productid b,cbill c where b.prodcode=c.prodcode and c.billid=12 and c.prodcode ='B001'
+
+ 0 records added
+
+select sum(am) from (select b.price*a.qty am from cbill a,productid b where a.prodcode=b.prodcode and a.billid=12) a
+select b.prod pname,b.price pprice,c.qty pnos,c.qty*b.price ptprice from  productid b,cbill c where b.prodcode=c.prodcode and c.billid=12 and c.prodcode ='B004'
+
+ 0 records added
+
+select sum(am) from (select b.price*a.qty am from cbill a,productid b where a.prodcode=b.prodcode and a.billid=12) a
+select b.prod pname,b.price pprice,c.qty pnos,c.qty*b.price ptprice from  productid b,cbill c where b.prodcode=c.prodcode and c.billid=13 and c.prodcode ='B001'
+
+ 0 records added
+
+select sum(am) from (select b.price*a.qty am from cbill a,productid b where a.prodcode=b.prodcode and a.billid=13) a
+select b.prod pname,b.price pprice,c.qty pnos,c.qty*b.price ptprice from  productid b,cbill c where b.prodcode=c.prodcode and c.billid=13 and c.prodcode ='B005'
+
+ 0 records added
+
+select sum(am) from (select b.price*a.qty am from cbill a,productid b where a.prodcode=b.prodcode and a.billid=13) a

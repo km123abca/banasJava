@@ -1,0 +1,7 @@
+Do everything above
+Change to your classes directory ( cd ../classes )
+Make a text file named manifest.txt in a text editor
+Put the following line in manifest: Main-Class: nameOfMainProgramFile
+Hit enter at the end of the line above and save manifest.txt in your classes folder
+Type this into your terminal jar -cvmf manifest.txt GameBoard.jar *.class
+Now you can execute your program by double clicking on it
