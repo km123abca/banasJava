@@ -33,7 +33,7 @@ class Rock extends Polygon{
 		this.yvel=Math.random()*4+4;
 		this.xpos=Math.random()*gwidth;
 		this.ypos=Math.random()*gheight;
-		GameBoard.w2debug("xpos:"+String.valueOf(this.xpos)+" ypos:"+String.valueOf(this.ypos)+"\n");		
+		//GameBoard.w2debug("xpos:"+String.valueOf(this.xpos)+" ypos:"+String.valueOf(this.ypos)+"\n");		
 
 			}	
 	
@@ -45,6 +45,15 @@ class Rock extends Polygon{
     		{
 
     			if(r==this) return false;
+    			Rectangle them=r.getBounds();
+    			Rectangle us=this.getBounds();
+    			if(us.intersects(them)) return true;
+    			return false;
+    		}
+    public boolean ship_collides(Ship r)
+    		{
+
+    			//if(r==this) return false;
     			Rectangle them=r.getBounds();
     			Rectangle us=this.getBounds();
     			if(us.intersects(them)) return true;
@@ -95,7 +104,7 @@ class Rock extends Polygon{
     			}
     		}
 	
-	public void move(ArrayList<Rock> rocks)
+	public void move(ArrayList<Rock> rocks,Ship s1)
 			{		
 			if(this.onScreen) 
 					{
@@ -108,6 +117,14 @@ class Rock extends Polygon{
 									//rx.simplemove(2);
 								}
 
+							}
+						if(s1.onScreen)
+							{
+							 if(this.ship_collides(s1))
+							 {
+							 	this.xvel*=-1;
+							 	this.yvel*=-1;
+							 }
 							}
 						this.checkWallCollsion();
 						this.increaseXpos();

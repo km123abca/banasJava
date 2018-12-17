@@ -88,9 +88,12 @@ public class GameBoard extends JFrame{
 						if (e.getKeyCode()==83)	{sPressed=true;}
 						if (e.getKeyCode()==68)	{dPressed=true;}
 						if (e.getKeyCode()==65)	{aPressed=true;}	
-						if (e.getKeyCode()==KeyEvent.VK_ENTER)	{enterPressed=true;playSoundEffect(laserFile);}
+						if (e.getKeyCode()==KeyEvent.VK_ENTER)	{enterPressed=true;
+																	//playSoundEffect(laserFile);
+																}
 			   			if (e.getKeyCode()==32)
 			    								{
+			    								playSoundEffect(laserFile);
 			    								System.out.println("shoot Now");
 			    								spacePressed=true;
 			    								}
@@ -227,10 +230,21 @@ class RepaintTheBoard2 implements Runnable
 
 class GameDrawingPanel2 extends JComponent { 	
 		
-	int width = GameBoard.boardWidth;
+	public static int width = GameBoard.boardWidth/2;
 	int height = GameBoard.boardHeight;
 	public static ArrayList<Rock> rocks = new ArrayList<Rock>();
 	public static Ship ssSamson=new Ship();
+	public static ArrayList<Bullet> bullets= new ArrayList<Bullet>();
+
+	public static Letterg lg=new Letterg(width);
+	public static Lettera la=new Lettera(width+16);
+	public static Letterm lm=new Letterm(width+32);
+	public static Lettere le=new Lettere(width+48);
+	public static Lettero lo=new Lettero(width+70);
+	public static Letterv lv=new Letterv(width+86);
+   public static Lettere le2=new Lettere(width+102);
+	public static Letterr lr=new Letterr(width+118);
+
 
 
 
@@ -263,19 +277,68 @@ class GameDrawingPanel2 extends JComponent {
 		
 		for(Rock r:rocks)
 			{
+		if(!r.onScreen) continue;
+	    r.move(rocks,ssSamson);
+		graphicSettings.setTransform(identity);		
+		graphicSettings.translate(r.xpos,r.ypos);
+		//graphicSettings.rotate(Math.toRadians(a1.getRotationAngle()));
+		graphicSettings.draw(r);
+			}
+		for(Bullet r:bullets)
+			{
+		if(!r.onScreen) continue;
 	    r.move(rocks);
 		graphicSettings.setTransform(identity);		
 		graphicSettings.translate(r.xpos,r.ypos);
 		//graphicSettings.rotate(Math.toRadians(a1.getRotationAngle()));
 		graphicSettings.draw(r);
 			}
-		ssSamson.move(GameBoard.wPressed,GameBoard.sPressed,GameBoard.aPressed,GameBoard.dPressed);
+		ssSamson.move(GameBoard.wPressed,GameBoard.sPressed,GameBoard.aPressed,GameBoard.dPressed,GameBoard.spacePressed);
 		graphicSettings.setTransform(identity);		
 		graphicSettings.translate(ssSamson.xpos,ssSamson.ypos);
 		graphicSettings.rotate(Math.toRadians(ssSamson.rotAngle));
 		graphicSettings.draw(ssSamson);
+
+		if(GameBoard.spacePressed)
+		{
+			bullets.add(new Bullet(ssSamson.getNose()[0],ssSamson.getNose()[1],ssSamson.rotAngle));
+		}
 		
+
+
+				graphicSettings.setTransform(identity);		
+				graphicSettings.translate(lg.xpos,lg.ypos);
+				graphicSettings.draw(lg);
+
+				graphicSettings.setTransform(identity);		
+				graphicSettings.translate(la.xpos,la.ypos);
+				graphicSettings.draw(la);
+
+				graphicSettings.setTransform(identity);		
+				graphicSettings.translate(lm.xpos,lm.ypos);
+				graphicSettings.draw(lm);
+
+				graphicSettings.setTransform(identity);		
+				graphicSettings.translate(le.xpos,le.ypos);
+				graphicSettings.draw(le);
+
+				graphicSettings.setTransform(identity);		
+				graphicSettings.translate(lo.xpos,lo.ypos);
+				graphicSettings.draw(lo);
+
+				graphicSettings.setTransform(identity);		
+				graphicSettings.translate(lv.xpos,lv.ypos);
+				graphicSettings.draw(lv);
+
+				graphicSettings.setTransform(identity);		
+				graphicSettings.translate(le2.xpos,le2.ypos);
+				graphicSettings.draw(le2);
+
+				graphicSettings.setTransform(identity);		
+				graphicSettings.translate(lr.xpos,lr.ypos);
+				graphicSettings.draw(lr);
 		
+					
 	} 
 	
 	
